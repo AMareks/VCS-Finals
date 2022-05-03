@@ -9,22 +9,19 @@ using System.Threading.Tasks;
 
 namespace Baigiamasis_Darbas.Pages
 {
-     class MainPage
+     class MainPage : BasePage
     {
-        private static IWebDriver _driver;
+        private const string PageAddress = "https://www.aic.lt/";
+    
+        private static IWebElement _searchBoxInput => Driver.FindElement(By.Id("searchParam"));
+        private static IWebElement _submitButton => Driver.FindElement(By.CssSelector("#header > ul.second-header-block.inline-list.nobackground > li:nth-child(2) > div > form > div > a"));
+        private static IWebElement _searchResult => Driver.FindElement(By.CssSelector("body > div.page-wrapper > div.content-wrapper > div > div.page-content > div.page-header > h1"));
 
-        private static IWebElement _searchBoxInput => _driver.FindElement(By.Id("searchParam"));
-        private static IWebElement _submitButton => _driver.FindElement(By.CssSelector("#header > ul.second-header-block.inline-list.nobackground > li:nth-child(2) > div > form > div > a"));
-        private static IWebElement _searchResult => _driver.FindElement(By.CssSelector("body > div.page-wrapper > div.content-wrapper > div > div.page-content > div.page-header > h1"));
+        public MainPage(IWebDriver webdriver) : base(webdriver) { }
        
-        public MainPage(IWebDriver webdriver )
-        {
-            _driver = webdriver;
-        }
-
         public void NavigateToDefaultPage()
         {
-            _driver.Url = "https://www.aic.lt/";
+            Driver.Url = PageAddress;
         }
 
        /* public void ClosePopUp()
@@ -50,18 +47,4 @@ namespace Baigiamasis_Darbas.Pages
         }
     }
 
-   
-
-
-        
-
-        
-
-      //  public void VerifyCheckedBoxes(string checkedBoxes)
-       // {
-     //       Assert.AreEqual($"{checkedBoxes}", _checkBoxResult.Text, "Box is not checked");
-      //  }
-
-
-
-    }
+}

@@ -8,22 +8,19 @@ using System.Threading.Tasks;
 
 namespace Baigiamasis_Darbas.Pages
 {
-     class LoginPage
+     class LoginPage : BasePage
     {
-        private static IWebDriver _driver;
-        private static IWebElement _clickLoginForm => _driver.FindElement(By.CssSelector("#header > ul:nth-child(2) > li.pull-right > ul.breadcrumbs > li.login-btn > a"));
-        private static IWebElement _enterEmail => _driver.FindElement(By.Id("loginUser"));
-        private static IWebElement _enterPass => _driver.FindElement(By.Id("loginPwd"));
-        private static IWebElement _loginSubmit => _driver.FindElement(By.Id("loginButton"));
-        private static IWebElement _myProfile => _driver.FindElement(By.CssSelector("#header > ul:nth-child(2) > li.pull-right > ul.breadcrumbs > li:nth-child(2) > a"));
-        public LoginPage(IWebDriver webdriver)
-        {
-            _driver = webdriver;
-        }
-
+        private const string PageAddress = "https://www.aic.lt/";
+        private static IWebElement _clickLoginForm => Driver.FindElement(By.CssSelector("#header > ul:nth-child(2) > li.pull-right > ul.breadcrumbs > li.login-btn > a"));
+        private static IWebElement _enterEmail => Driver.FindElement(By.Id("loginUser"));
+        private static IWebElement _enterPass => Driver.FindElement(By.Id("loginPwd"));
+        private static IWebElement _loginSubmit => Driver.FindElement(By.Id("loginButton"));
+        private static IWebElement _myProfile => Driver.FindElement(By.CssSelector("#header > ul:nth-child(2) > li.pull-right > ul.breadcrumbs > li:nth-child(2) > a"));
+        public LoginPage(IWebDriver webdriver) : base(webdriver) { }
+        
         public void NavigateToDefaultPage()
         {
-            _driver.Url = "https://www.aic.lt/";
+            Driver.Url = PageAddress;
         }
         public void OpenLoginForm()
         {

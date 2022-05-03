@@ -8,33 +8,30 @@ using System.Threading.Tasks;
 
 namespace Baigiamasis_Darbas.Pages
 {
-     class RegistrationPage
+     class RegistrationPage : BasePage
     {
-        private static IWebDriver _driver;
-        private static IWebElement _clickRegistrationForm => _driver.FindElement(By.Id("registerLink"));
-        private static IWebElement _enterEmail => _driver.FindElement(By.Id("userLoginName"));
-        private static IWebElement _enterPassword => _driver.FindElement(By.Id("userPassword"));
-        private static IWebElement _confirmPassword => _driver.FindElement(By.Id("userPasswordConfirm"));
-        private static IWebElement _enterName => _driver.FindElement(By.Id("oxuser__oxfname"));
-        private static IWebElement _enterLastName => _driver.FindElement(By.CssSelector("body > div.page-wrapper > div.content-wrapper.register-page > div > div.page-content > form > ul:nth-child(12) > li:nth-child(2) > input[type=text]"));
-        private static IWebElement _enterStreetName => _driver.FindElement(By.CssSelector("body > div.page-wrapper > div.content-wrapper.register-page > div > div.page-content > form > ul:nth-child(12) > li:nth-child(3) > input[type=text]"));
-        private static IWebElement _enterHouseNum => _driver.FindElement(By.CssSelector("private static IWebElement _enterStreetName => _driver.FindElement(By.CssSelector"));
-        private static IWebElement _enterZipCode => _driver.FindElement(By.CssSelector("body > div.page-wrapper > div.content-wrapper.register-page > div > div.page-content > form > ul:nth-child(12) > li:nth-child(6) > input[type=text]"));
-        private static IWebElement _enterCityName => _driver.FindElement(By.CssSelector("body > div.page-wrapper > div.content-wrapper.register-page > div > div.page-content > form > ul:nth-child(12) > li:nth-child(7) > input[type=text]"));
-       /* private static IWebElement _selectCountry => _driver.FindElement(By.CssSelector("#invCountrySelect"));
-        * susiziuret kaip is meniu pasidaryt kad methode rinktu pagal indeksa LT
-        * */
-        private static IWebElement _enterPhoneNum => _driver.FindElement(By.CssSelector("body > div.page-wrapper > div.content-wrapper.register-page > div > div.page-content > form > ul:nth-child(12) > li:nth-child(9) > input[type=text]"));
-        private static IWebElement _clickSave => _driver.FindElement(By.Id("accUserSaveTop"));
+        private const string PageAddress = "https://www.aic.lt/";
+        public RegistrationPage(IWebDriver webdriver) : base(webdriver) { }
 
-        public RegistrationPage(IWebDriver webdriver)
-        {
-            _driver = webdriver;
-        }
+        private static IWebElement _clickRegistrationForm => Driver.FindElement(By.Id("registerLink"));
+        private static IWebElement _enterEmail => Driver.FindElement(By.Id("userLoginName"));
+        private static IWebElement _enterPassword => Driver.FindElement(By.Id("userPassword"));
+        private static IWebElement _confirmPassword => Driver.FindElement(By.Id("userPasswordConfirm"));
+        private static IWebElement _enterName => Driver.FindElement(By.Id("oxuser__oxfname"));
+        private static IWebElement _enterLastName => Driver.FindElement(By.CssSelector("body > div.page-wrapper > div.content-wrapper.register-page > div > div.page-content > form > ul:nth-child(12) > li:nth-child(2) > input[type=text]"));
+        private static IWebElement _enterStreetName => Driver.FindElement(By.CssSelector("body > div.page-wrapper > div.content-wrapper.register-page > div > div.page-content > form > ul:nth-child(12) > li:nth-child(3) > input[type=text]"));
+        private static IWebElement _enterHouseNum => Driver.FindElement(By.CssSelector("body > div.page-wrapper > div.content-wrapper.register-page > div > div.page-content > form > ul:nth-child(12) > li.streetno.req-form-row > input[type=text]"));
+        private static IWebElement _enterZipCode => Driver.FindElement(By.CssSelector("body > div.page-wrapper > div.content-wrapper.register-page > div > div.page-content > form > ul:nth-child(12) > li:nth-child(6) > input[type=text]"));
+        private static IWebElement _enterCityName => Driver.FindElement(By.CssSelector("body > div.page-wrapper > div.content-wrapper.register-page > div > div.page-content > form > ul:nth-child(12) > li:nth-child(7) > input[type=text]"));
+       private static IWebElement _selectCountry => Driver.FindElement(By.CssSelector("#invCountrySelect"));
+       // * susiziuret kaip is meniu pasidaryt kad methode rinktu pagal indeksa LT
+       // * */
+        private static IWebElement _enterPhoneNum => Driver.FindElement(By.CssSelector("body > div.page-wrapper > div.content-wrapper.register-page > div > div.page-content > form > ul:nth-child(12) > li:nth-child(9) > input[type=text]"));
+        private static IWebElement _clickSave => Driver.FindElement(By.Id("accUserSaveTop"));
 
         public void NavigateToDefaultPage()
         {
-            _driver.Url = "https://www.aic.lt/";
+            Driver.Url = PageAddress;
         }
         public void OpenRegistrationForm()
         {
@@ -88,7 +85,7 @@ namespace Baigiamasis_Darbas.Pages
         }
         public void SelectCountry()
         {
-            IWebElement _selectCountry = _driver.FindElement(By.CssSelector("#invCountrySelect"));
+            IWebElement _selectCountry = Driver.FindElement(By.CssSelector("#invCountrySelect"));
             var selectObject = new SelectElement(_selectCountry);
             selectObject.SelectByIndex(3);
             //pabandyti pagal indeksa susirast
