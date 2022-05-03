@@ -1,12 +1,4 @@
-﻿using Baigiamasis_Darbas.Pages;
-using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using NUnit.Framework;
 
 
 namespace Baigiamasis_Darbas.Tests
@@ -14,8 +6,6 @@ namespace Baigiamasis_Darbas.Tests
   
      class tests: BaseTest
     {
-
-
         [TestCase("Batai" , TestName = "Search 1")]
         [TestCase("Kuprinė" , TestName = "Search 2")]
         [TestCase("Kava", TestName = "Search 3")]
@@ -31,15 +21,14 @@ namespace Baigiamasis_Darbas.Tests
         [Test]
         public static void TestLoginFunction()
         {
-
            _loginPage.NavigateToDefaultPage();
             _loginPage.OpenLoginForm();
             _loginPage.EnterUserEmail("testuotojast5@gmail.com");
             _loginPage.EnterPwd("12345678");
             _loginPage.Login();
             _loginPage.VerifyLogin("https://www.aic.lt/uzsakymu-istorija/");
-
         }
+
         [Test]
         public static void TestingRegitrationPage()
         {
@@ -56,14 +45,15 @@ namespace Baigiamasis_Darbas.Tests
             _registrationPage.EnterCityName("long Beachas");
             _registrationPage.SelectCountry();
             _registrationPage.EnterPhoneNumber("+37067843673");
-            //registrationPage.ClickSaveButton();
-           // registrationPage verification??
+            //_registrationPage.ClickSaveButton();
+            // _registrationPage verification??
         }
+
         [Test]
         public static void TestingEndToEnd()
         {
             _EndToEnd.NavigateToDefaultPage();
-            _EndToEnd.AcceptCookies();
+          //  _EndToEnd.AcceptCookies();
             _EndToEnd.SearchBoxFill("prožektorius");
             _EndToEnd.SubmitSearch();
             _EndToEnd.SelectProduct();
@@ -72,7 +62,6 @@ namespace Baigiamasis_Darbas.Tests
             // _EndToEnd.ProceedToPayment();
             //_EndToEnd.FinishOrder();
             //_EndToEnd.VerifyOrderSent();
-
         }
     }
 }

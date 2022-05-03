@@ -1,10 +1,6 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Baigiamasis_Darbas.Pages
 {
@@ -22,24 +18,29 @@ namespace Baigiamasis_Darbas.Pages
         {
             Driver.Url = PageAddress;
         }
+
         public void OpenLoginForm()
         {
             _clickLoginForm.Click();
         }
+
         public void EnterUserEmail(string userName)
         {
             _enterEmail.Clear();
             _enterEmail.SendKeys(userName);
         }
+
         public void EnterPwd(string password)
         {
             _enterPass.Clear();
             _enterPass.SendKeys(password);
         }
+
         public void Login()
         {
             _loginSubmit.Click();
         }
+
         public void VerifyLogin(string myProfile)
         {
             myProfile = "https://www.aic.lt/uzsakymu-istorija/";
