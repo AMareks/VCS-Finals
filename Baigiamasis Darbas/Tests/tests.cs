@@ -8,10 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Baigiamasis_Darbas.Tests
 {
-    internal class tests
+  
+     class tests
     {
+        
         private static IWebDriver _driver;
 
         [OneTimeSetUp]
@@ -20,18 +23,22 @@ namespace Baigiamasis_Darbas.Tests
             _driver = new ChromeDriver();
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             _driver.Manage().Window.Maximize();
+          // pakeisti normalu accept cookies method'a
+          //Optimizuot cookies kad cia butu
         }
 
         [OneTimeTearDown]
         public static void OneTimeTearDown()
         {
-           // _driver.Quit();
+            _driver.Quit();
         }
 
-        [Test]
-        public static void TestSearchFunction()
+
+        [TestCase("Batai" , TestName = "Search 1")]
+        [TestCase("Kuprinė" , TestName = "Search 2")]
+        public static void TestSearchFunction(string searchFor)
         {
-            string searchFor = "batai";
+            
 
             MainPage maiPage = new MainPage(_driver);
 
@@ -72,11 +79,24 @@ namespace Baigiamasis_Darbas.Tests
             registrationPage.EnterHouseNumber("");
             registrationPage.EnterZipCode("");
             registrationPage.EnterCityName("");
-            registrationPage.SelectCountry(3);
+            //registrationPage.SelectCountry(3);
             registrationPage.EnterPhoneNumber("");
-           // registrationPage.ClickSaveButton("");
-
-
+            // registrationPage.ClickSaveButton("");
+        }
+        [Test]
+        public static void TestingEndToEnd()
+        {
+            endToEnd EndToEnd = new endToEnd(_driver);
+            EndToEnd.NavigateToDefaultPage();
+            EndToEnd.AcceptCookies();
+            EndToEnd.SearchBoxFill("prožektorius");
+            EndToEnd.SubmitSearch();
+            EndToEnd.SelectProduct();
+            EndToEnd.GoToCheckout();
+           // EndToEnd.ProceedToAdressLine();
+           // EndToEnd.ProceedToPayment();
+            //EndToEnd.FinishOrder();
+             //EndToEnd.VerifyOrderSent();
 
         }
     }
