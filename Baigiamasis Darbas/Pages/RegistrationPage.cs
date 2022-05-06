@@ -1,6 +1,7 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-
+using System;
 
 namespace Baigiamasis_Darbas.Pages
 {
@@ -18,17 +19,22 @@ namespace Baigiamasis_Darbas.Pages
         private static IWebElement _enterStreetName => Driver.FindElement(By.CssSelector("body > div.page-wrapper > div.content-wrapper.register-page > div > div.page-content > form > ul:nth-child(12) > li:nth-child(3) > input[type=text]"));
         private static IWebElement _enterHouseNum => Driver.FindElement(By.CssSelector("body > div.page-wrapper > div.content-wrapper.register-page > div > div.page-content > form > ul:nth-child(12) > li.streetno.req-form-row > input[type=text]"));
         private static IWebElement _enterZipCode => Driver.FindElement(By.CssSelector("body > div.page-wrapper > div.content-wrapper.register-page > div > div.page-content > form > ul:nth-child(12) > li:nth-child(6) > input[type=text]"));
-        private static IWebElement _enterCityName => Driver.FindElement(By.CssSelector("body > div.page-wrapper > div.content-wrapper.register-page > div > div.page-content > form > ul:nth-child(12) > li:nth-child(7) > input[type=text]"));
-       //private static IWebElement _selectCountry => Driver.FindElement(By.CssSelector("#invCountrySelect")); veikia be sito??      
+        private static IWebElement _enterCityName => Driver.FindElement(By.CssSelector("body > div.page-wrapper > div.content-wrapper.register-page > div > div.page-content > form > ul:nth-child(12) > li:nth-child(7) > input[type=text]"));          
         private static IWebElement _enterPhoneNum => Driver.FindElement(By.CssSelector("body > div.page-wrapper > div.content-wrapper.register-page > div > div.page-content > form > ul:nth-child(12) > li:nth-child(9) > input[type=text]"));
         private static IWebElement _clickSave => Driver.FindElement(By.Id("accUserSaveTop"));
+        private static IWebElement _userAlreadyExists => Driver.FindElement(By.CssSelector("body > div.page-wrapper > div.content-wrapper.register-page > div > div.page-content > div.alert-box.error-message"));
+        private static IWebElement _clickCookies => Driver.FindElement(By.CssSelector("body > div.cc-window.cc-banner.cc-type-opt-in.cc-theme-block.cc-bottom.cc-color-override--1712192861 > div > a.cc-btn.cc-allow"));
 
         public void NavigateToDefaultPage()
         {
             Driver.Url = PageAddress;
         }
+        public void AcceptCookies()
+        {
+            _clickCookies.Click();
+        }
 
-        public void OpenRegistrationForm()
+            public void OpenRegistrationForm()
         {
             _clickRegistrationForm.Click();
         }
@@ -55,7 +61,6 @@ namespace Baigiamasis_Darbas.Pages
         {
             _enterName.Clear();
             _enterName.SendKeys(firstName);
-
         }
 
         public void EnterLastName(string lastName)
@@ -104,9 +109,9 @@ namespace Baigiamasis_Darbas.Pages
         {
             _clickSave.Click();
         }
-        public void VerifyAccountCreated()
+        public void VerifyAccountIsInUse()
         {
-            // Galvojam
+            Assert.AreEqual("Negalite užsiregistruoti testuotojast5@gmail.com. Gal jūs jau užsiregistravote?", _userAlreadyExists.Text);
         }
     }
 }

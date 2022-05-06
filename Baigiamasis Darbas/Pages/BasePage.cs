@@ -1,10 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Baigiamasis_Darbas.Pages
 {
@@ -17,10 +14,9 @@ namespace Baigiamasis_Darbas.Pages
             Driver = webDriver;
         }
 
-        public WebDriverWait GetWait(int seconds = 5)
+        public WebDriverWait GetWait(int seconds = 10)
         {
             WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(seconds));
-
             return wait;
         }
     }
